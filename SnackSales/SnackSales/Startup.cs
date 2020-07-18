@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SnackSales.Context;
+using SnackSales.Repositories;
 
 namespace SnackSales
 {
@@ -28,6 +29,8 @@ namespace SnackSales
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ISnackRepository, SnackRepository>();
 
             // ASP.NET CORE 2.0:
             // services.AddMvc();
