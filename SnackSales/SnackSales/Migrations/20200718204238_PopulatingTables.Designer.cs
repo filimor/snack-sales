@@ -9,8 +9,8 @@ using SnackSales.Context;
 namespace SnackSales.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200718200225_ad-mgraton InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200718204238_PopulatingTables")]
+    partial class PopulatingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

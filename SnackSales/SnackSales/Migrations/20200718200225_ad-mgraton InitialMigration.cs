@@ -2,7 +2,7 @@
 
 namespace SnackSales.Migrations
 {
-    public partial class admgratonInitialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
