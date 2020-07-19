@@ -1,13 +1,18 @@
-﻿@using SnackSales.Models
-@model IEnumerable<Snack>
+﻿@model IEnumerable<Snack>
 
 <div><h2>Todos os Lanches</h2></div>
-
-@foreach (var snack in Model)
-{
-    <div>
-        <h4>Lanche: @snack.Name</h4>
-        <p><img src="@snack.ImageUrl" alt="Imagem meramente ilustrativa"/></p>
-        <p>Preço: @snack.Price.ToString("C")</p>
-    </div>
-}
+<div class="row">
+    @foreach (var snack in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@snack.ImageUrl" class="img-rounded" alt="Imagem meramente ilustrativa" />
+            </div>
+            <div class="caption">
+                <h3 class="pull-right"> @snack.Price.ToString("C")</h3>
+                <h3>Lanche: @snack.Name</h3>
+                <p>@snack.ShortDescription</p>
+            </div>
+        </div>
+    }
+</div>
