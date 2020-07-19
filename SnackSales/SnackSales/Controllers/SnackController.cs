@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SnackSales.Repositories;
+using SnackSales.ViewModels;
 
 namespace SnackSales.Controllers
 {
@@ -24,8 +25,11 @@ namespace SnackSales.Controllers
             ViewBag.Snack = "Snacks";
             ViewData["Category"] = "Category";
 
-            var snacks = _snackRepository.Snacks;
-            return View(snacks);
+            var snackListViewModel = new SnackListViewModel();
+            snackListViewModel.Snacks = _snackRepository.Snacks;
+            snackListViewModel.CurrentCategory = "Current Category";
+            return View(snackListViewModel);
+
         }
     }
 }

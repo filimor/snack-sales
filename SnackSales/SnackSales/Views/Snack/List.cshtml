@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Snack>
+﻿@model SnackListViewModel
 
-<div><h2>Todos os Lanches</h2></div>
+<div><h2>@Model.CurrentCategory</h2></div>
 <div class="row">
-    @foreach (var snack in Model)
+    @foreach (var snack in Model.Snacks)
     {
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
