@@ -1,0 +1,66 @@
+﻿@model CartViewModel
+
+<div class="row checkoutForm">
+    <h2>Seu carrinho de compras</h2>
+    <h4>Aqui estão os seus pedidos</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Quantidade</th>
+            <th>Lanche</th>
+            <th class="text-right">Preço</th>
+            <th class="text-right">Subtotal</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Cart.CartItems)
+        {
+            <tr>
+                <td class="text-center">@item.Amount</td>
+                <td class="text-left">@item.Snack.Name</td>
+                <td class="text-right">@item.Snack.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((item.Amount * item.Snack.Price).ToString("c"))
+                </td>
+                <td class="text-center">
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-lancheId="@item.Snack.Id">
+                        <img src="~/images/delete.png"/>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.TotalValue.ToString("c")
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <div class="btn-group ">
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Encerrar Pedido</a>
+            <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Adicionar mais lanches<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menuitem">
+                    <li>
+                        <a asp-controller="Snack" asp-action="List" asp-route-categoria="Normal">
+                            <b>Comum</b>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Snack" asp-action="List" asp-route-categoria="Natural">
+                            <b>Natural</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
