@@ -16,7 +16,7 @@ namespace SnackSales.Repositories
         }
 
         public IEnumerable<Snack> Snacks => _context.Snacks.Include(c => c.Category);
-        public IEnumerable<Snack> FavoriteSnacks => _context.Snacks.Where(p => p.Favorite).Include(c => c.Category);
+        public IEnumerable<Snack> FavoriteSnacks => _context.Snacks.Where(f => f.Favorite).Include(c => c.Category);
 
         public Snack GetSnackById(int snackId)
         {

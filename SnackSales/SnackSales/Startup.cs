@@ -31,6 +31,8 @@ namespace SnackSales
             services.AddScoped(Cart.GetCart);
 
             services.AddControllersWithViews();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
