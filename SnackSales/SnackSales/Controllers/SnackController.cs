@@ -50,5 +50,11 @@ namespace SnackSales.Controllers
             };
             return View(snackListViewModel);
         }
+
+        public IActionResult Details(int snackId)
+        {
+            var snack = _snackRepository.Snacks.FirstOrDefault(s => s.Id == snackId);
+            return snack == null ? View("Error") : View(snack);
+        }
     }
 }

@@ -16,10 +16,7 @@ namespace SnackSales.Components
 
         public IViewComponentResult Invoke()
         {
-            //_cart.CartItems = _cart.GetCartItems();
-
-            var items = new List<CartItem> {new CartItem(), new CartItem()};
-            _cart.CartItems = items;
+            _cart.CartItems = _cart.GetCartItems();
 
             var cartViewModel = new CartViewModel
             {
