@@ -56,6 +56,11 @@ namespace SnackSales
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    "categoryFilter",
+                    "Snack/{action}/{category?}",
+                    new {Controller = "Snack", action = "List"});
+
+                endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
