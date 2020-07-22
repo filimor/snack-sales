@@ -56,5 +56,29 @@ namespace SnackSales.Controllers
             var snack = _snackRepository.Snacks.FirstOrDefault(s => s.Id == snackId);
             return snack == null ? View("Error") : View(snack);
         }
+
+        public IActionResult Search(string searchString)
+        {
+            IEnumerable<Snack> snacks;
+            var currentCategory = string.Empty;
+
+            if (string.IsNullOrEmpty(searchString))
+            {
+                snacks = _snackRepository.Snacks.OrderBy(s => s.Id);
+            }
+            else
+            {
+                snacks = _snackRepository.Snacks.Where(s =>
+                    s.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
+
+            var snackViewModel = new SnackListViewModel
+            {
+                Snacks = snacks,
+                CurrentCategory = "Todos os lanches"
+            };
+
+            return View("List", snackViewModel);
+        }
     }
 }
