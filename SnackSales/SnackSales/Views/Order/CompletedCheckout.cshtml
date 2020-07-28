@@ -1,0 +1,18 @@
+﻿<br />
+<div class="container">
+    <div class="jumbotron">
+        <h2>@ViewBag.CompletedCheckoutMessage</h2>
+        <div class="card">
+            <div class="card-body">
+                <p>Cliente: <strong>@ViewBag.Customer</strong></p>
+                <br />
+                <p>Data do Pedido: <strong>@ViewBag.OrderDate</strong></p>
+                <br />
+                <p>Número do Pedido: <strong>@ViewBag.OrderNumber</strong></p>
+                <br />
+                <p>Valor Total do Pedido: <strong>@(((decimal)ViewBag.TotalValue).ToString("C2"))</strong></p>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
