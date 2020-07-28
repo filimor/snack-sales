@@ -1,15 +1,26 @@
-﻿<br />
+﻿@model Order
+
+<br />
 <div class="container">
     <div class="jumbotron">
         <h2>@ViewBag.CompletedCheckoutMessage</h2>
         <div class="card">
             <div class="card-body">
-                <p>Cliente: <strong>@ViewBag.Customer</strong></p>
+                <p>Cliente: <strong>@Model.Name</strong></p>
                 <br />
-                <p>Data do Pedido: <strong>@ViewBag.OrderDate</strong></p>
+                <p>Data do Pedido: <strong>@Model.ShipmentDate</strong></p>
                 <br />
-                <p>Número do Pedido: <strong>@ViewBag.OrderNumber</strong></p>
+                <p>Número do Pedido: <strong>@Model.Id</strong></p>
                 <br />
+                @foreach (var item in Model.OrderItems)
+                {
+                    <img src="@item.Snack.ImageUrl" width="40" height="40"/>
+                    <ul>
+                        <li>@item.Amount</li>
+                        <li>@item.Snack.Name</li>
+                        <li>@item.Snack.Price</li>
+                    </ul>
+                }
                 <p>Valor Total do Pedido: <strong>@(((decimal)ViewBag.TotalValue).ToString("C2"))</strong></p>
                 <br />
             </div>

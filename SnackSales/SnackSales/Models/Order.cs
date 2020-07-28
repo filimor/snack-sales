@@ -9,7 +9,7 @@ namespace SnackSales.Models
     {
         [BindNever] public int Id { get; set; }
 
-        public List<OrderItem> OrdemItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
 
         [Required(ErrorMessage = "Informe o nome")]
         [Display(Name = "Nome")]

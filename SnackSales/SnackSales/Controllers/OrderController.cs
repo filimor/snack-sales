@@ -34,27 +34,14 @@ namespace SnackSales.Controllers
             if (ModelState.IsValid)
             {
                 _orderRepository.CreateOrder(order);
-                TempData["Customer"] = order.Name;
-                TempData["OrderNumber"] = order.Id;
-                TempData["OrderDate"] = order.ShipmentDate;
-                TempData["TotalValue"] = _cart.GetTotalValue();
+                ViewBag.TotalValue = _cart.GetTotalValue();
+                ViewBag.CompletedCheckoutMessage = "Obrigado pelo seu pedido :)";
                 _cart.ClearCart();
 
-                return RedirectToAction("CompletedCheckout");
+                return View("~/Views/Order/CompletedCheckout.cshtml", order);
             }
 
             return View(order);
-        }
-
-        public IActionResult CompletedCheckout()
-        {
-            ViewBag.Customer = TempData["Customer"];
-            ViewBag.OrderNumber = TempData["OrderNumber"];
-            ViewBag.OrderDate = TempData["OrderDate"];
-            ViewBag.TotalValue = TempData["TotalValue"];
-            ViewBag.CompletedCheckoutMessage = "Obrigado pelo seu pedido :)";
-
-            return View();
         }
     }
 }
