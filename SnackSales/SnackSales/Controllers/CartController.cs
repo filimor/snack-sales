@@ -25,6 +25,7 @@ namespace SnackSales.Controllers
                 Cart = _cart,
                 TotalValue = _cart.GetTotalValue()
             };
+
             return View(cartViewModel);
         }
 

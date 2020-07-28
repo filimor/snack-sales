@@ -28,17 +28,13 @@ namespace SnackSales.Controllers
             if (string.IsNullOrEmpty(category))
             {
                 snacks = _snackRepository.Snacks.OrderBy(s => s.Id);
+                currentCatetory = "Todos os Lanches";
             }
             else
             {
-                if (string.Equals(_category, "Comum", StringComparison.OrdinalIgnoreCase))
-                {
-                    snacks = _snackRepository.Snacks.Where(s => s.Category.Name.Equals("Comum")).OrderBy(s => s.Name);
-                }
-                else
-                {
-                    snacks = _snackRepository.Snacks.Where(s => s.Category.Equals("Natural")).OrderBy(s => s.Name);
-                }
+                snacks = string.Equals(_category, "Comum", StringComparison.OrdinalIgnoreCase)
+                    ? _snackRepository.Snacks.Where(s => s.Category.Name.Equals("Comum")).OrderBy(s => s.Name)
+                    : _snackRepository.Snacks.Where(s => s.Category.Equals("Natural")).OrderBy(s => s.Name);
 
                 currentCatetory = _category;
             }
@@ -54,6 +50,7 @@ namespace SnackSales.Controllers
         public IActionResult Details(int snackId)
         {
             var snack = _snackRepository.Snacks.FirstOrDefault(s => s.Id == snackId);
+            //TODO: Error page
             return snack == null ? View("Error") : View(snack);
         }
 
@@ -62,23 +59,16 @@ namespace SnackSales.Controllers
             IEnumerable<Snack> snacks;
             var currentCategory = string.Empty;
 
-            if (string.IsNullOrEmpty(searchString))
-            {
-                snacks = _snackRepository.Snacks.OrderBy(s => s.Id);
-            }
-            else
-            {
-                snacks = _snackRepository.Snacks.Where(s =>
+            snacks = string.IsNullOrEmpty(searchString)
+                ? _snackRepository.Snacks.OrderBy(s => s.Id)
+                : _snackRepository.Snacks.Where(s =>
                     s.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
-            }
 
-            var snackViewModel = new SnackListViewModel
+            return View("List", new SnackListViewModel
             {
                 Snacks = snacks,
                 CurrentCategory = "Todos os lanches"
-            };
-
-            return View("List", snackViewModel);
+            });
         }
     }
 }

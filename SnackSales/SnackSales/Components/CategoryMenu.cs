@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SnackSales.Repositories;
 
 namespace SnackSales.Components
 {
-    public class CategoryMenu:ViewComponent
+    public class CategoryMenu : ViewComponent
     {
         private readonly ICategoryRepository _categoryRepository;
 

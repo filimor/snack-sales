@@ -46,7 +46,7 @@ namespace SnackSales.Models
             // Create a Cart if necessary, otherwise increase amount
             if (cartItem == null)
             {
-                cartItem = new CartItem()
+                cartItem = new CartItem
                 {
                     CartId = Id,
                     Snack = snack,
@@ -58,6 +58,8 @@ namespace SnackSales.Models
             {
                 cartItem.Amount += amount;
             }
+
+            _context.SaveChanges();
         }
 
         public int RemoveItem(Snack snack)
@@ -88,7 +90,7 @@ namespace SnackSales.Models
         public List<CartItem> GetCartItems()
         {
             return CartItems ??= _context.CartItems.Where(
-                    c => c.CartId == Id).Include(s => s.Snack).ToList();
+                c => c.CartId == Id).Include(s => s.Snack).ToList();
         }
 
         public void ClearCart()

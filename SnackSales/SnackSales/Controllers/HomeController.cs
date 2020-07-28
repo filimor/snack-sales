@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SnackSales.Models;
 using SnackSales.Repositories;
 using SnackSales.ViewModels;
@@ -22,7 +17,7 @@ namespace SnackSales.Controllers
 
         public IActionResult Index()
         {
-            var homeViewModel = new HomeViewModel()
+            var homeViewModel = new HomeViewModel
             {
                 FavoriteSnacks = _snackRepository.FavoriteSnacks
             };
@@ -30,10 +25,11 @@ namespace SnackSales.Controllers
             return View(homeViewModel);
         }
 
+        //TODO: remove Error view
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

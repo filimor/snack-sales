@@ -1,4 +1,6 @@
-﻿using SnackSales.Models;
+﻿//TODO: Move to Interfaces folder
+
+using SnackSales.Models;
 
 namespace SnackSales.Repositories
 {

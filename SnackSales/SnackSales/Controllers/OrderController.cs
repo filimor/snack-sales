@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using SnackSales.Models;
 using SnackSales.Repositories;
 
@@ -28,7 +27,7 @@ namespace SnackSales.Controllers
 
             if (_cart.CartItems.Count == 0)
             {
-                ModelState.AddModelError("","Seu carrinho está vazio.");
+                ModelState.AddModelError("", "Seu carrinho está vazio.");
             }
 
             if (ModelState.IsValid)
@@ -38,8 +37,20 @@ namespace SnackSales.Controllers
                 ViewBag.CompletedCheckoutMessage = "Obrigado pelo seu pedido :)";
                 _cart.ClearCart();
 
-                return View("~/Views/Order/CompletedCheckout.cshtml", order);
+                return View("CompletedCheckout", order);
             }
+
+            return View(order);
+        }
+
+        //TODO: It's still necessary?
+        public IActionResult CompletedCheckout(Order order)
+        {
+            ViewBag.Cliente = TempData["Customer"];
+            ViewBag.DataPedido = TempData["OrderDate"];
+            ViewBag.NumeroPedido = TempData["OrderNumber"];
+            ViewBag.TotalPedido = TempData["TotalValue"];
+            ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido :) ";
 
             return View(order);
         }
