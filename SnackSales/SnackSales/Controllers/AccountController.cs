@@ -16,7 +16,6 @@ namespace SnackSales.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet]
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel
@@ -49,6 +48,34 @@ namespace SnackSales.Controllers
             }
 
             return View(loginViewModel);
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginViewModel registerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser{UserName = registerViewModel.Username};
+                var result = await _userManager.CreateAsync(user, registerViewModel.Password).ConfigureAwait(false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(registerViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync().ConfigureAwait(false);
         }
     }
 }
