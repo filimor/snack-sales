@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SnackSales.Models;
 using SnackSales.Repositories;
@@ -29,6 +30,7 @@ namespace SnackSales.Controllers
             return View(cartViewModel);
         }
 
+        [Authorize]
         public IActionResult AddToCart(int snackId)
         {
             var snack = _snackRepository.Snacks.FirstOrDefault(s => s.Id == snackId);
@@ -40,6 +42,7 @@ namespace SnackSales.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult RemoveFromCart(int snackId)
         {
             var snack = _snackRepository.Snacks.FirstOrDefault(s => s.Id == snackId);

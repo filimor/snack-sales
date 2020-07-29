@@ -6,6 +6,7 @@ namespace SnackSales.Controllers
     {
         public IActionResult Index()
         {
+            //return User.Identity.IsAuthenticated ? View() : (IActionResult)RedirectToAction("Login", "Account");
             return View();
         }
     }
