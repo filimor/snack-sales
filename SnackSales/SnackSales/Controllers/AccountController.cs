@@ -61,7 +61,7 @@ namespace SnackSales.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser{UserName = registerViewModel.Username};
+                var user = new IdentityUser {UserName = registerViewModel.Username};
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
@@ -76,6 +76,7 @@ namespace SnackSales.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync().ConfigureAwait(false);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
