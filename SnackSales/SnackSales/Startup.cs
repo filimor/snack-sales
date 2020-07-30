@@ -61,6 +61,9 @@ namespace SnackSales
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute("areaRoute", "Admin",
+                    "{area:exists}/{Controller=Admin}/{Action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     "categoryFilter",
                     "Snack/{action}/{category?}",
