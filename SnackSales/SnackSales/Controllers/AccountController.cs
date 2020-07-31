@@ -68,6 +68,9 @@ namespace SnackSales.Controllers
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Member");
+                    await _signInManager.SignInAsync(user, false);
+                    //TODO: Redirect to LoggedIn
                     return RedirectToAction("Index", "Home");
                 }
             }
