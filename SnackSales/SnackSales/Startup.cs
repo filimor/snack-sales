@@ -28,6 +28,7 @@ namespace SnackSales
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ISnackRepository, SnackRepository>();

@@ -31,7 +31,10 @@
                             <a asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
                         </li>
                     }
-                    @await Component.InvokeAsync("CartSummary")
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @await Component.InvokeAsync("CartSummary")
+                    }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
                 <form class="navbar-form navbar-right" asp-controller="Snack" asp-action="Search" method="get">
